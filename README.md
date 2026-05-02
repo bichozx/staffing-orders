@@ -14,7 +14,7 @@ El sistema está dividido en dos servicios principales:
 
 # Instalación
 
-1. Clonar proyecto git clone ``
+1. Clonar proyecto git clone `https://github.com/bichozx/staffing-orders.git`
 2. `npm install`
 3. **Configuración de Entorno:**
    Copia el archivo de ejemplo y ajusta las credenciales de las bases de datos:
