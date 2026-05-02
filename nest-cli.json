@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "monorepo": true,
+  "projects": {
+    "staffing-orders": {
+      "type": "application",
+      "root": "apps/staffing-orders",
+      "entryFile": "main",
+      "sourceRoot": "apps/staffing-orders/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/staffing-orders/tsconfig.app.json"
+      }
+    },
+    "staffing-audit": {
+      "type": "application",
+      "root": "apps/staffing-audit",
+      "entryFile": "main",
+      "sourceRoot": "apps/staffing-audit/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/staffing-audit/tsconfig.app.json"
+      }
+    }
+  }
+}
