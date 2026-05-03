@@ -31,4 +31,4 @@ RUN npm install --omit=dev
 COPY --from=builder /app/dist ./dist
 
 
-CMD ["node", "dist/apps/staffing-orders/staffing-orders/src/main.js"]
+CMD ["node", "dist/apps/staffing-orders/main.js"]
