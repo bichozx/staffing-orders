@@ -23,6 +23,8 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "strictPropertyInitialization": true,
+    "types": ["node", "jest"],
+
     "paths": {}
   }
 }
