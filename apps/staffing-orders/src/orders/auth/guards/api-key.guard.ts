@@ -7,7 +7,7 @@ import {
 
 import { ConfigService } from '@nestjs/config';
 import { Observable } from 'rxjs';
-import { Request } from 'express'; // Importar el tipo de Express
+import { Request } from 'express';
 
 @Injectable()
 export class ApiKeyGuard implements CanActivate {
@@ -18,12 +18,10 @@ export class ApiKeyGuard implements CanActivate {
   ): boolean | Promise<boolean> | Observable<boolean> {
     const request = context.switchToHttp().getRequest<Request>();
 
-    // Obtenemos el header y nos aseguramos de que sea un string o undefined
     const apiKey = request.headers['x-api-key'];
 
     const validApiKey = this.configService.get<string>('API_KEY');
 
-    // Comprobación de seguridad para evitar comparar contra undefined
     if (!validApiKey) {
       throw new Error('API_KEY no configurada en las variables de entorno');
     }

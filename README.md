@@ -42,9 +42,61 @@ El sistema está dividido en dos servicios principales:
 
    # Ejemplo de variables clave para local (.env)
 
-   DB_HOST=localhost
-   MONGO_URI=mongodb://mongo_admin:7PBFJijlXuSS492s@localhost:27017/audit?authSource=admin
-   AUDIT_MS_HOST=localhost
+##### ========================
+
+#### GENERAL
+
+##### ========================
+
+NODE_ENV=development
+
+##### ========================
+
+#### ORDERS SERVICE
+
+##### ========================
+
+ORDERS_PORT=3005
+
+##### Postgres (local)
+
+- DB_HOST=localhost
+- DB_PORT=5432
+- DB_NAME=orders_postgres
+- DB_USERNAME=postgres
+- DB_PASSWORD=Danger4587
+
+##### ========================
+
+#### AUDIT SERVICE
+
+##### ========================
+
+AUDIT_PORT=3006
+
+# Mongo (local)
+
+- MONGO_URI=mongodb://mongo_admin:7PBFJijlXuSS492s@localhost:27017/audit?authSource=admin
+
+- MONGO_ADMIN=mongo_admin
+- PASSWORD=7PBFJijlXuSS492s
+
+##### ========================
+
+#### MICROSERVICES (TCP)
+
+##### ========================
+
+- AUDIT_MS_HOST=localhost
+- AUDIT_MS_PORT=4001
+
+##### ========================
+
+#### SECURITY
+
+##### ========================
+
+- API_KEY=super-secret-key-min-32-chars
 
 # Modos de Ejecución
 
@@ -80,8 +132,79 @@ npm run start:dev orders
 npm run start:dev audit
 ```
 
+# API Endpoints
+
+## Orders Service Prefijo api
+
+### Crear orden
+
+```
+POST /orders
+
+Headers:
+x-api-key: super-secret-key-min-32-chars
+
+Body:
+{
+"userId": "16",
+"product": "Laptop",
+"quantity": 22
+}
+```
+
+---
+
+### Obtener órdenes (paginadas)
+
+```
+GET /orders?page=1&limit=10
+```
+
+---
+
+### Actualizar órdenes
+
+```
+PUT /orders/{id}/status
+
+Body:
+{
+"status": "CONFIRMED"
+}
+```
+
+## Audit Service
+
+```
+GET /audit/{id}
+```
+
+---
+
 # Pruebas de Conectividad
 
 1. Crea una orden en el servicio de Orders.
 2. Actualiza su estado.
 3. Consulta el servicio de Audit para verificar que el log se guardó correctamente vía TCP.
+
+---
+
+## Testing
+
+Ejecutar pruebas e2e:
+
+npm run test:e2e
+
+---
+
+# Decisiones de diseño
+
+- Se utiliza arquitectura de microservicios para desacoplar la lógica de negocio (Orders) del sistema de auditoría (Audit).
+
+- Se eligió PostgreSQL para Orders debido a su soporte de transacciones y consultas complejas.
+
+- Se eligió MongoDB para Audit por su flexibilidad en almacenamiento de logs no estructurados.
+
+- La comunicación entre servicios se realiza vía TCP para reducir overhead frente a HTTP en eventos internos.
+
+- Se implementa API Key como mecanismo de autenticación simple, ideal para servicios internos.

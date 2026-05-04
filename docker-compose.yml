@@ -39,11 +39,11 @@ services:
       dockerfile: Dockerfile.orders
     container_name: orders_service
     ports:
-      - '3000:3000' # Mapeado al puerto de producción en .env.local
+      - '3000:3000'
     env_file:
-      - .env.local # Usa el archivo con hosts de docker (postgres-db)
+      - .env.local
     environment:
-      - NODE_ENV=production # Crucial para que NestJS elija .env.local
+      - NODE_ENV=production
     depends_on:
       postgres-db:
         condition: service_healthy
@@ -56,9 +56,9 @@ services:
       dockerfile: Dockerfile.audit
     container_name: audit_service
     ports:
-      - '3001:3001' # Mapeado al puerto de producción en .env.local
+      - '3001:3001'
     env_file:
-      - .env.local # Cambiado a .env.local para que vea a 'staffing-audit' como host
+      - .env.local
     environment:
       - NODE_ENV=production
     depends_on:
