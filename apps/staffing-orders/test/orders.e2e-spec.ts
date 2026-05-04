@@ -70,7 +70,6 @@ describe('Orders Flow (e2e)', () => {
         status: 'PENDING',
       });
 
-      // Tipado después de validar
       const body = response.body as OrderResponseTest;
 
       expect(body.id).toBeDefined();

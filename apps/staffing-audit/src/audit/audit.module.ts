@@ -3,7 +3,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config'; // 1. Importar est
 
 import { AuditController } from './controllers/audit.controller';
 import { AuditService } from './services/audit.service';
-// staffing-audit/src/audit/audit.module.ts
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
