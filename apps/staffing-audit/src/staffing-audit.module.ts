@@ -1,10 +1,9 @@
+import { AuditModule } from './audit/audit.module';
 import { Module } from '@nestjs/common';
-import { StaffingAuditController } from './staffing-audit.controller';
-import { StaffingAuditService } from './staffing-audit.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [],
-  controllers: [StaffingAuditController],
-  providers: [StaffingAuditService],
+  imports: [AuditModule],
+  exports: [TypeOrmModule],
 })
 export class StaffingAuditModule {}
