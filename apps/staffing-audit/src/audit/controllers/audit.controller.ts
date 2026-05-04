@@ -7,7 +7,6 @@ import { OrderStatusChangedEvent } from '../dto/audit-event.dto';
 export class AuditController {
   constructor(private readonly auditService: AuditService) {}
 
-  // 🔥 ESCUCHAR EVENTO DESDE ORDERS
   @EventPattern('order.status.changed')
   async handleOrderStatusChanged(@Payload() data: OrderStatusChangedEvent) {
     console.log('AUDIT EVENT RECEIVED:', data);
@@ -20,7 +19,6 @@ export class AuditController {
     });
   }
 
-  // 📡 ENDPOINT PARA CONSULTAR AUDITORÍA
   @Get('audit/:orderId')
   async getAudit(@Param('orderId') orderId: string) {
     return this.auditService.findByOrderId(orderId);
